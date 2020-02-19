@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#room {
+    width:1000px;
+    height:562.5px;
+    margin: 50px auto;
+}
+
+img{
+    width:1000px;
+    height:562.5px;
+}
+
+
+.settings {
+    height: 50px;
+    width: 100%;
+    background: #f1f3f4;
+    display: flex;
+    justify-content: center;
+}
+
+/* 切换动画 */
+
+.change-animation {
+    height: 50px;
+    margin: 0 20px;
+    background-color: #fff;
+    border: none;
+    position: relative;
+    display: inline-block;
+}
+
+.change-animation>button {
+    background-color: #4CAF50;
+    height: 50px;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.change-animation-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.change-animation-content ul li {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+
+.change-animation-content ul li:hover {
+    background: #f5f5f5;
+}
+
+.change-animation:hover .change-animation-content {
+    display: block;
+    z-index: 1;
+}
+
+/* 切换时间 */
+
+.change-time {
+    height: 50px;
+    margin: 0 20px;
+    background-color: #fff;
+    border: none;
+    position: relative;
+    display: inline-block;
+}
+
+.change-time>button {
+    background-color: #4CAF50;
+    height: 50px;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.change-time-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.change-time:hover .change-time-content {
+    display: block;
+    z-index: 1;
+}
+
+/* 改变图片 */
+
+.change-img {
+    height: 50px;
+    margin: 0 20px;
+    background-color: #fff;
+    border: none;
+    position: relative;
+    display: inline-block;
+}
+
+.change-img>button {
+    background-color: #4CAF50;
+    height: 50px;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.change-img-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.change-img:hover .change-img-content {
+    display: block;
+    z-index: 1;
+}
+
+.input-btn {
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    width: 100%;
+    background-color: #fff;
+}
+
+.input-btn:hover {
+    background-color: #f5f5f5;
+}
+

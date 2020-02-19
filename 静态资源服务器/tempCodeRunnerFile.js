@@ -1,0 +1,1 @@
+response.setHeader("Content-Type", mime.getType(filepath)+"; charset=utf-8");
