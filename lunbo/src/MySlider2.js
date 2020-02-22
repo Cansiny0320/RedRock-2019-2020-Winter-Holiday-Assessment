@@ -33,7 +33,9 @@ class MySlider {
 		for (let j = 0; j < this.navButton.length; j++) {
 			this.navButton[j].onclick = this.navButtonClick.bind(this);//按钮绑定事件
 		}
+		this.setImg();
 	}
+
 	//初始化函数
 	resetAllButton() {
 		let buttonPosition = this.slideHeight / 2 - 20; //动态得到按钮垂直居中的top值
@@ -279,6 +281,15 @@ class MySlider {
 		this.imgIndex = liTarget.index;
 	}
 
+	setImg(){
+		for (let i = 0; i < this.img.length; i++) {
+			let imgIndex = i+1;
+			let imgSrc = JSON.parse(window.localStorage.getItem('img'+imgIndex));
+			if (imgSrc && imgIndex && (imgIndex >= 1 && imgIndex <= this.img.length)) {
+				this.img[imgIndex - 1].src = imgSrc;
+			}
+		}
+	}
 }
 
 //立即执行函数初始化css样式

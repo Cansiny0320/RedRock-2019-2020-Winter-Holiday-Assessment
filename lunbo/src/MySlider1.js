@@ -27,10 +27,7 @@ let MySlider = function (slideId) {
 		this.up.onclick = this.prevStart2.bind(this); //按钮绑定事件
 		this.autoStart = setInterval(this.nextStart2.bind(this), this.autoTime); //定时器
 	}
-	//遍历所有原点
-	// for (let j = 0; j < this.navButton.length; j++) {
-	// 	this.navButton[j].onclick = this.navButtonClick.bind(this);
-	// }
+	this.setImg(); //设置图片
 };
 
 //立即执行函数初始化css样式
@@ -79,7 +76,7 @@ MySlider.prototype.resetAllButton = function () {
 	nav.setAttribute('id', 'nav');
 	nav.setAttribute('class', 'nav');
 	this.slide.appendChild(nav);
-	//test 事件委托
+	//事件委托
 	nav.addEventListener('click', this.navButtonClick.bind(this), false);
 	//生成导航原点
 	for (let i = 0; i < this.img.length; i++) {
@@ -258,8 +255,6 @@ MySlider.prototype.navButtonClick = function (e) {
 	clearInterval(this.time);
 	let _this = this;
 	let liTarget = e.target;		//获取点击的原点
-	console.log(liTarget);
-
 	let val = 1;
 	let opacity = 0; // 目标透明度
 	if (this.mode === '左右滑动') {
@@ -316,4 +311,15 @@ MySlider.prototype.navButtonStyle = function (liTarget) {
 	liTarget.style.background = '#333';
 	this.navButton[this.imgIndex - 1].style.background = '#fff';
 	this.imgIndex = liTarget.index;
+}
+
+//改变图片
+MySlider.prototype.setImg = function () {
+	for (let i = 0; i < this.img.length; i++) {
+		let imgIndex = i + 1;
+		let imgSrc = JSON.parse(window.localStorage.getItem('img' + imgIndex));
+		if (imgSrc && imgIndex && (imgIndex >= 1 && imgIndex <= this.img.length)) {
+			this.img[imgIndex - 1].src = imgSrc;
+		}
+	}
 }

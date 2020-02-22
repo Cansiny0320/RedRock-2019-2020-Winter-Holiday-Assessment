@@ -21,6 +21,7 @@ img{
     background: #f1f3f4;
     display: flex;
     justify-content: center;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 
 /* 切换动画 */
