@@ -1,11 +1,7 @@
 // ES5 面向对象
-var MySlider = function (slideId) {
-	this.mode = '左右滑动'; //切换动画  默认 左右滑动 可切换 淡入淡出
-	var newMode = JSON.parse(window.localStorage.getItem('animation-mode'));
-	if (newMode) this.mode = newMode;
-	this.autoTime = 3000; //自动切换时间
-	var newAutoTime = JSON.parse(window.localStorage.getItem('autoTime'));
-	if (newAutoTime) this.autoTime = newAutoTime;
+let MySlider = function (slideId) {
+	this.mode = JSON.parse(window.localStorage.getItem('animation-mode')) || '左右滑动'; //切换动画  默认 左右滑动 可切换 淡入淡出
+	this.autoTime = JSON.parse(window.localStorage.getItem('autoTime')) || 3000; //自动切换时间
 	this.slide = document.getElementById(slideId); 	//获取第一层
 	this.room = this.slide.getElementsByTagName('div')[0];  //获取第二层
 	this.img = this.room.getElementsByTagName('img');	//获取图片数组
@@ -32,15 +28,15 @@ var MySlider = function (slideId) {
 		this.autoStart = setInterval(this.nextStart2.bind(this), this.autoTime); //定时器
 	}
 	//遍历所有原点
-	for (var j = 0; j < this.navButton.length; j++) {
-		this.navButton[j].onclick = this.navButtonClick.bind(this);
-	}
+	// for (let j = 0; j < this.navButton.length; j++) {
+	// 	this.navButton[j].onclick = this.navButtonClick.bind(this);
+	// }
 };
 
 //立即执行函数初始化css样式
 MySlider.prototype.resetCss = function () {
 	//初始化需要的样式
-	var createStyle = document.createElement('style');
+	let createStyle = document.createElement('style');
 	/*两个左右按钮公共样式*/
 	createStyle.innerHTML += '.buttonCss{font-size:20px;position:absolute;z-index:2;background:rgba(51,51,51,0.4);color:#fff;padding:10px;border-style:none;outline:none;cursor:pointer;display:none;}';
 	createStyle.innerHTML += '.room{position:absolute;}'	//初始化room的css
@@ -53,7 +49,7 @@ MySlider.prototype.resetCss = function () {
 //初始化函数
 MySlider.prototype.resetAllButton = function () {
 
-	var buttonPosition = this.slideHeight / 2 - 20;		//动态得到按钮垂直居中的top值
+	let buttonPosition = this.slideHeight / 2 - 20;		//动态得到按钮垂直居中的top值
 
 	this.slide.setAttribute('class', 'slide');
 	this.room.style.left = 0 + 'px';	//初始化room的left
@@ -61,7 +57,7 @@ MySlider.prototype.resetAllButton = function () {
 	this.room.setAttribute('class', 'room');
 
 	//创建按钮prev
-	var prev = document.createElement('div');
+	let prev = document.createElement('div');
 	prev.innerHTML = '<';
 	prev.setAttribute('class', 'buttonCss prev');
 	prev.style.left = 0 + 'px;';
@@ -70,7 +66,7 @@ MySlider.prototype.resetAllButton = function () {
 	this.up = prev;	//获取prev按钮
 
 	//创建按钮next
-	var next = document.createElement('div');
+	let next = document.createElement('div');
 	next.innerHTML = '>';
 	next.setAttribute('class', 'buttonCss next');
 	next.style.right = 0 + 'px';
@@ -79,14 +75,15 @@ MySlider.prototype.resetAllButton = function () {
 	this.down = next; //获取next按钮
 
 	//创建导航原点定位框
-	var nav = document.createElement('ul');
+	let nav = document.createElement('ul');
 	nav.setAttribute('id', 'nav');
 	nav.setAttribute('class', 'nav');
 	this.slide.appendChild(nav);
-
+	//test 事件委托
+	nav.addEventListener('click', this.navButtonClick.bind(this), false);
 	//生成导航原点
-	for (var i = 0; i < this.img.length; i++) {
-		var navButtonLi = document.createElement('li');
+	for (let i = 0; i < this.img.length; i++) {
+		let navButtonLi = document.createElement('li');
 		navButtonLi.setAttribute('class', 'navButton');
 		navButtonLi.index = i + 1;
 		nav.appendChild(navButtonLi);
@@ -123,11 +120,11 @@ MySlider.prototype.onmouseleave = function () {
 MySlider.prototype.nextStart = function () {
 
 	clearInterval(this.time);
-	var _this = this;  // 此处 this == MySlider 取到Myslider
+	let _this = this;  // 此处 this == MySlider 取到Myslider
 
 	this.time = setInterval(function () {
 		// 此处 this == winsow	
-		var left = parseInt(_this.room.style.left);
+		let left = parseInt(_this.room.style.left);
 
 		if (_this.imgIndex < _this.img.length) {
 
@@ -163,9 +160,9 @@ MySlider.prototype.nextStart = function () {
 
 MySlider.prototype.nextStart2 = function () {
 	clearInterval(this.time);
-	var _this = this;
-	var val = 1;
-	var opacity = 0; // 目标透明度
+	let _this = this;
+	let val = 1;
+	let opacity = 0; // 目标透明度
 	this.time = setInterval(function () {
 		if (val >= opacity) {
 			val -= _this.speed2;
@@ -194,10 +191,10 @@ MySlider.prototype.nextStart2 = function () {
 MySlider.prototype.prevStart = function () {
 
 	clearInterval(this.time);
-	var _this = this;
+	let _this = this;
 
 	this.time = setInterval(function () {
-		var left = parseInt(_this.room.style.left);
+		let left = parseInt(_this.room.style.left);
 
 		if (_this.imgIndex == 1) {
 			if (left > -_this.slideWidth * (_this.img.length - 1)) {
@@ -230,9 +227,9 @@ MySlider.prototype.prevStart = function () {
 
 MySlider.prototype.prevStart2 = function () {
 	clearInterval(this.time);
-	var _this = this;
-	var val = 1;
-	var opacity = 0; // 目标透明度
+	let _this = this;
+	let val = 1;
+	let opacity = 0; // 目标透明度
 	this.time = setInterval(function () {
 		if (val >= opacity) {
 			val -= _this.speed2;
@@ -259,16 +256,18 @@ MySlider.prototype.prevStart2 = function () {
 MySlider.prototype.navButtonClick = function (e) {
 
 	clearInterval(this.time);
-	var _this = this;
-	var liTarget = e.target;		//获取点击的原点
-	var val = 1;
-	var opacity = 0; // 目标透明度
+	let _this = this;
+	let liTarget = e.target;		//获取点击的原点
+	console.log(liTarget);
+
+	let val = 1;
+	let opacity = 0; // 目标透明度
 	if (this.mode === '左右滑动') {
 
 		this.time = setInterval(function () {
 
 
-			var left = parseInt(_this.room.style.left);
+			let left = parseInt(_this.room.style.left);
 
 			//如果点击的原点位置大于轮播的位置
 			if (liTarget.index > _this.imgIndex) {
@@ -306,6 +305,8 @@ MySlider.prototype.navButtonClick = function (e) {
 				_this.navButtonStyle.call(_this, liTarget);
 			}
 		}, 1000 / 60);
+	} else {
+		return false;
 	}
 }
 

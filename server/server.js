@@ -4,11 +4,10 @@ const fs = require('fs'),
   http = require('http'),
   mime = require('mime');
 
-
 const root = path.resolve(process.argv[2] || '.');
 // 创建服务器:
 const server = http.createServer(function (request, response) {
-  // 获得URL的path
+  // 获得URL的path,类似 '/css/bootstrap.css':
   const pathname = url.parse(request.url).pathname;
   // 获得对应的本地文件路径，类似 '/srv/www/css/bootstrap.css':
   const filepath = path.join(root, pathname);
@@ -31,7 +30,7 @@ const server = http.createServer(function (request, response) {
         fs.createReadStream(filepath).pipe(response);
       } else if (stats.isDirectory()) {
         let html = ''
-        // 获取文件/文件夹列表
+        // 获取文件列表
         fs.readdir(filepath, function (err, files) {
           if (err) {
             console.log(err);

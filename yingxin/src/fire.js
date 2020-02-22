@@ -1,4 +1,4 @@
-var Fire = function () {
+let Fire = function () {
     this.fireShowUp = document.querySelectorAll('.fireShowUp');
     this.fire = document.querySelectorAll('.fire');
     this.reset();

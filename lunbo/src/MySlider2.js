@@ -1,12 +1,8 @@
 //ES6 class
 class MySlider {
 	constructor(slideId) {
-		this.mode = '左右滑动'; //切换动画  默认 左右滑动 可切换 淡入淡出
-		var newMode = JSON.parse(window.localStorage.getItem('animation-mode'));
-		if(newMode) this.mode = newMode;
-		this.autoTime = 3000; //自动切换时间
-		var newAutoTime = JSON.parse(window.localStorage.getItem('autoTime'));
-		if(newAutoTime) this.autoTime = newAutoTime;
+		this.mode = JSON.parse(window.localStorage.getItem('animation-mode')) || '左右滑动'; //切换动画  默认 左右滑动 可切换 淡入淡出
+		this.autoTime = JSON.parse(window.localStorage.getItem('autoTime')) || 3000; //自动切换时间
 		this.slide = document.getElementById(slideId); //获取第一层
 		this.room = this.slide.getElementsByTagName('div')[0]; //获取第二层
 		this.img = this.room.getElementsByTagName('img'); //获取图片数组
@@ -34,19 +30,19 @@ class MySlider {
 		}
 		
 		//遍历所有原点
-		for (var j = 0; j < this.navButton.length; j++) {
+		for (let j = 0; j < this.navButton.length; j++) {
 			this.navButton[j].onclick = this.navButtonClick.bind(this);//按钮绑定事件
 		}
 	}
 	//初始化函数
 	resetAllButton() {
-		var buttonPosition = this.slideHeight / 2 - 20; //动态得到按钮垂直居中的top值
+		let buttonPosition = this.slideHeight / 2 - 20; //动态得到按钮垂直居中的top值
 		this.slide.setAttribute('class', 'slide');
 		this.room.style.left = 0 + 'px'; //初始化room的left
 		this.room.style.width = this.slideWidth * (this.img.length) + 'px'; //设置room的宽度，等于图片的宽度*图片的数量
 		this.room.setAttribute('class', 'room');
 		//创建按钮prev
-		var prev = document.createElement('div');
+		let prev = document.createElement('div');
 		prev.innerHTML = '<';
 		prev.setAttribute('class', 'buttonCss prev');
 		prev.style.left = 0 + 'px;';
@@ -55,7 +51,7 @@ class MySlider {
 		this.up = prev;	//获取prev按钮
 
 		//创建按钮next
-		var next = document.createElement('div');
+		let next = document.createElement('div');
 		next.innerHTML = '>';
 		next.setAttribute('class', 'buttonCss next');
 		next.style.right = 0 + 'px';
@@ -64,14 +60,14 @@ class MySlider {
 		this.down = next; //获取next按钮
 
 		//创建导航原点定位框
-		var nav = document.createElement('ul');
+		let nav = document.createElement('ul');
 		nav.setAttribute('id', 'nav');
 		nav.setAttribute('class', 'nav');
 		this.slide.appendChild(nav);
 
 		//生成导航原点
-		for (var i = 0; i < this.img.length; i++) {
-			var navButtonLi = document.createElement('li');
+		for (let i = 0; i < this.img.length; i++) {
+			let navButtonLi = document.createElement('li');
 			navButtonLi.setAttribute('class', 'navButton');
 			navButtonLi.index = i + 1;
 			nav.appendChild(navButtonLi);
@@ -103,10 +99,10 @@ class MySlider {
 	//down按钮事件
 	nextStart() {
 		clearInterval(this.time);
-		var _this = this; // 此处 this == MySlider 取到Myslider
+		let _this = this; // 此处 this == MySlider 取到Myslider
 		this.time = setInterval(function () {
 			// 此处 this == winsow	
-			var left = parseInt(_this.room.style.left);
+			let left = parseInt(_this.room.style.left);
 			if (_this.imgIndex < _this.img.length) {
 				if (left > (-_this.slideWidth * _this.imgIndex)) {
 					_this.room.style.left = parseInt(_this.room.style.left) + _this.speed + 'px';
@@ -138,9 +134,9 @@ class MySlider {
 
 	nextStart2() {
 		clearInterval(this.time);
-		var _this = this;
-		var val = 1;
-		var opacity = 0; // 目标透明度
+		let _this = this;
+		let val = 1;
+		let opacity = 0; // 目标透明度
 		this.time = setInterval(function () {
 			if (val >= opacity) {    
 				val -= _this.speed2;
@@ -166,9 +162,9 @@ class MySlider {
 	//up按钮事件
 	prevStart() {
 		clearInterval(this.time);
-		var _this = this;
+		let _this = this;
 		this.time = setInterval(function() {
-			var left = parseInt(_this.room.style.left);
+			let left = parseInt(_this.room.style.left);
 			if (_this.imgIndex == 1) {
 				if (left > -_this.slideWidth * (_this.img.length - 1)) {
 					_this.room.style.left = left + (_this.speed * 2) + 'px';
@@ -198,9 +194,9 @@ class MySlider {
 
 	prevStart2() {
 		clearInterval(this.time);
-		var _this = this;
-		var val = 1 ;
-		var opacity = 0; // 目标透明度
+		let _this = this;
+		let val = 1 ;
+		let opacity = 0; // 目标透明度
 		this.time = setInterval(function () {
 			if (val >= opacity) {    
 				val -=  _this.speed2;
@@ -226,16 +222,16 @@ class MySlider {
 	//原点点击事件
 	navButtonClick(e) {
 		clearInterval(this.time);
-		var _this = this;
-		var liTarget = e.target; //获取点击的原点
-		var val = 1;
-		var opacity = 0; // 目标透明度
+		let _this = this;
+		let liTarget = e.target; //获取点击的原点
+		let val = 1;
+		let opacity = 0; // 目标透明度
 		if (this.mode === '左右滑动') {
 	
 			this.time = setInterval(function () {
 	
 	
-				var left = parseInt(_this.room.style.left);
+				let left = parseInt(_this.room.style.left);
 	
 				//如果点击的原点位置大于轮播的位置
 				if (liTarget.index > _this.imgIndex) {
@@ -289,7 +285,7 @@ class MySlider {
 MySlider.prototype.resetCss = function () {
 
 	//初始化需要的样式
-	var createStyle = document.createElement('style');
+	let createStyle = document.createElement('style');
 	/*两个左右按钮公共样式*/
 	createStyle.innerHTML += '.buttonCss{font-size:20px;position:absolute;z-index:2;background:rgba(51,51,51,0.4);color:#fff;padding:10px;border-style:none;outline:none;cursor:pointer;display:none;}';
 	createStyle.innerHTML += '.room{position:absolute;}'	//初始化room的css

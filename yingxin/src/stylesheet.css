@@ -12,7 +12,7 @@
 }
 
 body::-webkit-scrollbar {
-    width: 0 !important
+    width: 0 !important;
 }
 
 @font-face {

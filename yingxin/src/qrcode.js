@@ -1,4 +1,4 @@
-var Qrocode = function (className, animationClassName) {
+let Qrocode = function (className, animationClassName) {
     this.qrcode = document.getElementsByClassName(className)[0]; //获取二维码块
     this.animationClassName = animationClassName
 };

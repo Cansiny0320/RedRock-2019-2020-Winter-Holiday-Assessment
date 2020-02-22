@@ -1,4 +1,4 @@
-var GoTop = function (className) {
+let GoTop = function (className) {
     this.goTopBtn = document.getElementsByClassName(className)[0]; //绑定返回顶部按钮
     this.goTopBtn.onclick = this.goTop.bind(this); //绑定事件
     this.time = null; //定时器

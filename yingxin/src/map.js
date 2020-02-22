@@ -1,4 +1,4 @@
-var Map = function () {
+let Map = function () {
     let map = document.querySelector('#map'); //获取地图
     let mapBtn = document.querySelectorAll('.map-btn'); //获取地点按钮数组
     let smallBtn = document.querySelector('.small-btn'); //获取缩小地图按钮
@@ -6,13 +6,13 @@ var Map = function () {
     let flags = []; //地图上的falgs
     let times = 1; //放大倍数 范围[1,4] 每次改变0.6
     //设置缩放倍数
-    var setTimes = function (times) {
+    let setTimes = function (times) {
         map.style.transform = 'scale(' + times + ')';
         map.style.left = 0;
         map.style.top = 0;
     }
     //添加flag
-    var addFlag = function () {
+    let addFlag = function () {
         map.innerHTML = '';
         for (let i = 0; i < flags.length; i++) {
             const element = flags[i];
@@ -20,7 +20,7 @@ var Map = function () {
         }
     }
     //设置 map 和 flag 样式
-    var setStyle = function (mapStyle, flagStyle) {
+    let setStyle = function (mapStyle, flagStyle) {
         map.style = mapStyle;
         flags.push(flagStyle);
         times = 4;

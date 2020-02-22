@@ -1,4 +1,4 @@
-var Settings = function () {
+let Settings = function () {
     this.timeInput = document.querySelector('.change-time-input'); //获取时间输入框
     this.timeBtn = document.querySelector('.change-time-content .input-btn');//获取时间改变确定按钮
     this.imgSrcInput = document.querySelector('#imgSrc'); //获取图片src输入框
